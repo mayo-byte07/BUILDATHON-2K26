@@ -1,0 +1,27 @@
+{
+  "name": "aashray-disaster-relocation-mvp",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "server": "node server/index.js",
+    "client": "vite --host 0.0.0.0 --port 5173",
+    "build": "vite build",
+    "start": "node server/index.js",
+    "test:api": "node scripts/smoke-test.mjs"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "concurrently": "latest",
+    "cors": "latest",
+    "express": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "lucide-react": "latest",
+    "leaflet": "latest",
+    "react-leaflet": "latest"
+  },
+  "devDependencies": {}
+}
