@@ -11,6 +11,7 @@ All routes are served by the local Express API at `http://localhost:3001`. Versi
 | GET | `/api/v1/dashboard/summary` | Optional `district_id`, `hazard_type` | KPI totals, capacity summary and caveats |
 | GET | `/api/v1/hazards` | Optional `type`, `status` | Hazard layer metadata and source notes |
 | GET | `/api/v1/hazards/map` | None in MVP; reserved for bbox/type filters | GeoJSON FeatureCollection of demo settlement/site points |
+| GET | `/api/v1/weather` | None | Last normalized weather-provider payload, if a weather feed is configured |
 
 ## Settlements & assessments
 
@@ -38,6 +39,7 @@ Capacity rule: `effective_capacity = min(land, housing, water, sanitation)`, and
 |---|---|---|---|
 | POST | `/api/v1/copilot/query` | `question` string | Rule-based answer, dataset reference and caveats; not a generative AI model |
 | GET | `/api/v1/data-sources/status` | Optional `district_id` (reserved for extension) | Feed status, last fetch and error metadata; official feeds marked disconnected |
+| POST | `/api/v1/data-sources/refresh` | None | Requests an immediate refresh of configured provider adapters; credentials remain server-side |
 | POST | `/api/v1/reports/generate` | Optional `assessment_id`, `plan_id`; `format: "json"` | Report job metadata and authorized local download path |
 | GET | `/api/v1/reports/:id/download` | Report ID | JSON report snapshot |
 
@@ -48,3 +50,7 @@ Capacity rule: `effective_capacity = min(land, housing, water, sanitation)`, and
 - `500 INTERNAL_ERROR`: unexpected server error.
 
 Production extensions still required: authentication and role-based permissions, persistent database/PostGIS, request/assessment IDs in logs, audit trail, official provider adapters with licence checks, data freshness validation, and background jobs for long-running GIS/report work.
+
+### Live-provider adapter
+
+Configure the URLs and bearer tokens in the server-side `.env` file (see `.env.example`). The adapter supports JSON arrays, `data`, `results`, `items`, and GeoJSON `features` collections. Empty or malformed data never replaces the bundled records; provider failures are shown by the source-status endpoint. No credentials are exposed to the browser.

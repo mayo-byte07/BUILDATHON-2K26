@@ -1,3 +1,4 @@
+
 # AASHRAY — Habitat Safety & Relocation Intelligence MVP
 
 A local hackathon prototype with a redesigned, clean dashboard inspired by the user-provided UI reference: left navigation, top search/profile bar, five KPI cards, satellite-style risk map, map-layer legend, Copilot panel, at-risk settlement table, relocation planner, and shelter-capacity table.
@@ -52,3 +53,5 @@ To run the API smoke test, keep `npm run dev` running and open a second terminal
 ```bash
 npm run test:api
 ```
+=======
+# BUILDATHON-2K26
